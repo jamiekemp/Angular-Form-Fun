@@ -18,7 +18,7 @@ import { StorageService } from './services/storage.service';
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule
     ],
     providers: [
         StorageService
