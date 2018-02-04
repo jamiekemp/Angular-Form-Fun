@@ -34,16 +34,14 @@ export class ReactiveFormComponent implements OnInit {
         };
     }
 
-    constructor(
-        private fb: FormBuilder,
-        private storageService: StorageService,
-    ) {
+    constructor(private fb: FormBuilder,
+                private storageService: StorageService) {
         this.todoListSessionValues = this.storageService.getItem(this.todoSessionKey);
         this.createForm();
     }
 
     ngOnInit() {
-        console.log('test');
+        console.log(`Jimbo's Todo List!`);
     }
 
     createForm() {                                                          // Create Form
