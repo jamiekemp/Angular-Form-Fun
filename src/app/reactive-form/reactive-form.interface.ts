@@ -11,9 +11,9 @@ export interface FormGroupTodo extends FormGroup {
 }
 
 export interface TodoItem {
-    name: string;
-    desc: string;
-    edit: boolean;
+    name:       string;
+    desc:       string;
+    confirmed:  boolean;
 }
 
 

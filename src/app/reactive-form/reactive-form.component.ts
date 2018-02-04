@@ -18,9 +18,9 @@ export class ReactiveFormComponent implements OnInit {
     initItem: Function = () => {
         const item = (values) => {                                              // Init item
             return {
-                name: [values.name, Validators.required],
-                desc: [values.desc, Validators.required],
-                edit: [values.edit, Validators.pattern('true')]
+                name:       [values.name, Validators.required],
+                desc:       [values.desc, Validators.required],
+                confirmed:  [values.confirmed, Validators.pattern('true')]
             };
         };
 
@@ -68,7 +68,7 @@ export class ReactiveFormComponent implements OnInit {
         }
     }
 
-    addItem(values: TodoItem = {name: '', desc: '', edit: false}) {
+    addItem(values: TodoItem = {name: '', desc: '', confirmed: false}) {
         const initItem = this.initItem();                               // Init Module for creating todoItem
         const todoItem = <FormGroupTodo>initItem.todoItem(values);      // Create FormGroup todoItem via initItem
         const todoList = <FormArray>this.todoForm.controls.todoList;    // Reference todoForm todoList
@@ -79,9 +79,9 @@ export class ReactiveFormComponent implements OnInit {
         };
 
         todoItem.toggleEdit = () => {
-            todoItem.value.edit ? todoItem.cachedValue = todoItem.value : delete todoItem.cachedValue;    // Create cached value or delete it
-            const editValue = todoItem.value.edit;                                                        // Get todoForm todoList locked value
-            todoItem.controls.edit.setValue(!editValue);                                                  // Set inverted todoForm todoList value
+            todoItem.value.confirmed ? todoItem.cachedValue = todoItem.value : delete todoItem.cachedValue;         // Create cached value or delete it
+            const confirmedValue = todoItem.value.confirmed;                                                        // Get todoForm todoList locked value
+            todoItem.controls.confirmed.setValue(!confirmedValue);                                                  // Set inverted todoForm todoList value
         };
 
         todoItem.cancelEdit = () => {
