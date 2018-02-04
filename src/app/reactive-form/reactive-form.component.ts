@@ -12,21 +12,21 @@ export class ReactiveFormComponent implements OnInit {
     todoForm: FormGroup;
 
     initItem: Function = () => {
-        const item = () => {
+        const item = () => {                                            // Init item
             return {
                 name:   ['', Validators.required],
                 desc:   ['', Validators.required],
-                locked: ['', Validators.pattern('true')]
+                locked: [false, Validators.pattern('true')]
             };
         };
 
-        const todoItem = () => {
+        const todoItem = () => {                                        // Return an fb group of item
             const controls = item();
             return this.fb.group(controls);
         };
 
         return {
-            todoItem: todoItem
+            todoItem: todoItem                                          // Reveal todoItem
         };
     }
 
@@ -38,17 +38,17 @@ export class ReactiveFormComponent implements OnInit {
         console.log('test');
     }
 
-    createForm() {
+    createForm() {                                                      // Create Form
         this.todoForm = this.fb.group({
             todoList: this.fb.array([]),
         });
 
-        this.addItem();
+        this.addItem();                                                 // Some quick and dirty item adding
         this.addItem();
     }
 
     onSubmit() {
-        if (this.todoForm.valid) {
+        if (this.todoForm.valid) {                                      // Just some quick consoles
             console.log('VALID: this.todoForm', this.todoForm);
         } else {
             console.log('INVALID: this.todoForm', this.todoForm);
@@ -56,16 +56,14 @@ export class ReactiveFormComponent implements OnInit {
     }
 
     addItem() {
-        const control = <FormArray>this.todoForm.controls.todoList;
-        const initItem = this.initItem();
-        const todoItem = <FormGroupTodo>initItem.todoItem();
-        control.push(todoItem);
-
-        todoItem.controls.locked.setValue(false);
+        const initItem = this.initItem();                               // Init Module
+        const todoItem = <FormGroupTodo>initItem.todoItem();            // Init FormGroup
+        const todoList = <FormArray>this.todoForm.controls.todoList;    // Reference todoForm todoList
+        todoList.push(todoItem);                                        // Push FormGroup to todoList
 
         todoItem.toggleLock = () => {
-            const lockValue = todoItem.controls.locked.value;
-            todoItem.controls.locked.setValue(!lockValue);
+            const lockValue = todoItem.controls.locked.value;           // Get todoForm todoList locked value
+            todoItem.controls.locked.setValue(!lockValue);              // Set todoForm todoList locked !value
         };
     }
 
