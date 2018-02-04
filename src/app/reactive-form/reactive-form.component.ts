@@ -16,11 +16,11 @@ export class ReactiveFormComponent implements OnInit {
             return {
                 name:   ['', Validators.required],
                 desc:   ['', Validators.required],
-                locked: [false, Validators.pattern('true')]
+                edit:   [false, Validators.pattern('true')]
             };
         };
 
-        const todoItem = () => {                                        // Return an fb group of item
+        const todoItem = () => {                                        // Return a FormBuilder group of item
             const controls = item();
             return this.fb.group(controls);
         };
@@ -43,8 +43,7 @@ export class ReactiveFormComponent implements OnInit {
             todoList: this.fb.array([]),
         });
 
-        this.addItem();                                                 // Some quick and dirty item adding
-        this.addItem();
+        // this.addItem();                                              // Some quick and dirty item adding
     }
 
     onSubmit() {
@@ -56,14 +55,28 @@ export class ReactiveFormComponent implements OnInit {
     }
 
     addItem() {
-        const initItem = this.initItem();                               // Init Module
-        const todoItem = <FormGroupTodo>initItem.todoItem();            // Init FormGroup
+        const initItem = this.initItem();                               // Init Module for creating todoItem
+        const todoItem = <FormGroupTodo>initItem.todoItem();            // Create FormGroup todoItem via initItem
         const todoList = <FormArray>this.todoForm.controls.todoList;    // Reference todoForm todoList
         todoList.push(todoItem);                                        // Push FormGroup to todoList
 
-        todoItem.toggleLock = () => {
-            const lockValue = todoItem.controls.locked.value;           // Get todoForm todoList locked value
-            todoItem.controls.locked.setValue(!lockValue);              // Set todoForm todoList locked !value
+        todoItem.index = () => {
+            return todoList.controls.indexOf(todoItem);                 // Get the index of this item
+        };
+
+        todoItem.toggleEdit = () => {
+            todoItem.value.edit ? todoItem.cachedValue = todoItem.value : delete todoItem.cachedValue;    // Create cached value or delete it
+            const editValue = todoItem.value.edit;                                                        // Get todoForm todoList locked value
+            todoItem.controls.edit.setValue(!editValue);                                                  // Set inverted todoForm todoList value
+        };
+
+        todoItem.cancelEdit = () => {
+            todoItem.setValue(todoItem.cachedValue);                    // Restore cachedValue
+            delete todoItem.cachedValue;                                // And then delete it
+        };
+
+        todoItem.remove = () => {
+            todoList.removeAt(todoItem.index());                        // Remove item from todoList based on it's index in todoList
         };
     }
 

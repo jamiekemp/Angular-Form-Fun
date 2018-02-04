@@ -11,30 +11,34 @@
 
                             <div class="grid-x align-middle">
                                 <div class="small-12 cell">
-                                    <label for="todoName-{{i+1}}" id="todoName-label">Todo: {{i+1}}</label>
-                                    <input [readonly]="todo.value.locked" formControlName="name" type="text">
+                                    <label [for]="'name-'+i+1" [id]="'name-label-'+i+1">Todo: {{i+1}}</label>
+                                    <input [readonly]="todo.value.edit" formControlName="name" [name]="'name-'+i+1" type="text">
                                 </div>
                             </div>
 
                             <div class="grid-x align-middle">
                                 <div class="small-12 cell">
-                                    <label for="todoDesc-{{i+1}}" id="todoDesc-label">Description: {{i+1}}</label>
-                                    <input [readonly]="todo.value.locked" formControlName="desc" type="text">
+                                    <label [for]="'desc-'+i+1" [id]="'desc-label-'+i+1">Description: {{i+1}}</label>
+                                    <input [readonly]="todo.value.edit" formControlName="desc" [name]="'desc-'+i+1" type="text">
                                 </div>
                             </div>
 
                             <div class="grid-x align-middle">
                                 <div class="small-12 cell">
-                                    <button type="button" class="button" (click)="todo.toggleLock()">{{todo.value.locked ? 'Unlock' : 'Lock'}} Item</button>
+                                    <button type="button" class="button" (click)="todo.toggleEdit()">{{todo.value.edit ? 'Edit' : 'Confirm'}}</button>
+                                    <button type="button" class="button secondary" (click)="todo.cancelEdit()" *ngIf="todo.cachedValue">Cancel edit</button>
+                                    <button type="button" class="button secondary" (click)="todo.remove()">Remove</button>
                                 </div>
                             </div>
+                            <hr>
 
                         </ng-container>
                     </div>
                 </div>
             </div>
 
-            <button type="submit">Submit</button>
+            <button (click)="addItem()" type="button" class="button">Add</button>
+            <button type="submit" class="button secondary">Submit</button>
         </form>
     </div>
 </div>
