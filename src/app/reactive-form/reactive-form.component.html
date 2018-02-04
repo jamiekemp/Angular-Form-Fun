@@ -1,0 +1,47 @@
+<!-- JIMTODO LIST -->
+<div class="grid-x">
+    <div class="small-10 cell">
+        <form [formGroup]="todoForm" (ngSubmit)="onSubmit(todoForm)" novalidate>
+            <div class="grid-x">
+                <div class="small-10 medium-8 large-6 cell">
+                    <label for="firstName">First name</label>
+                    <input formControlName="firstName" type="text">
+                </div>
+            </div>
+            <div class="grid-x">
+                <div class="small-10 medium-8 large-6 cell">
+                    <label for="lastName">Last name</label>
+                    <input formControlName="lastName" type="text">
+                </div>
+            </div>
+
+            <div class="grid-x">
+                <div formArrayName="todoList" class="small-10 medium-8 large-6 cell">
+                    <div *ngIf="todoForm.controls['todoList'].controls.length">
+                        <ng-container *ngFor="let todo of todoForm.controls['todoList'].controls; let i=index"
+                                      [formGroupName]="i"
+                                      [formGroup]="todoForm.controls['todoList'].controls[i]">
+
+                            <div class="grid-x">
+                                <div class="small-12 cell">
+                                    <label for="todoName-{{i+1}}" id="todoName-label">Todo:{{i+1}}</label>
+                                    <input formControlName="name" type="text">
+                                </div>
+                            </div>
+
+                            <div class="grid-x">
+                                <div class="small-12 cell">
+                                    <label for="todoDesc-{{i+1}}" id="todoDesc-label">Description:{{i+1}}</label>
+                                    <input formControlName="desc" type="text">
+                                </div>
+                            </div>
+
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
