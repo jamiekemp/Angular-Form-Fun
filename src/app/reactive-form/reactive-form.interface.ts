@@ -10,4 +10,10 @@ export interface FormGroupTodo extends FormGroup {
     remove:         Function;
 }
 
+export interface TodoItem {
+    name: string;
+    desc: string;
+    edit: boolean;
+}
+
 

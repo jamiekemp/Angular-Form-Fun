@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { FormGroupTodo } from './reactive-form.interface';
+import { FormGroupTodo, TodoItem } from './reactive-form.interface';
 import { StorageService } from '../services/storage.service';
+import { get } from 'lodash';
 
 @Component({
     selector: 'app-reactive-form',
@@ -11,23 +12,25 @@ import { StorageService } from '../services/storage.service';
 export class ReactiveFormComponent implements OnInit {
 
     todoForm: FormGroup;
+    todoListSessionValues: any;
+    todoSessionKey = 'jim-todo';
 
     initItem: Function = () => {
-        const item = () => {                                            // Init item
+        const item = (values) => {                                              // Init item
             return {
-                name:   ['', Validators.required],
-                desc:   ['', Validators.required],
-                edit:   [false, Validators.pattern('true')]
+                name: [values.name, Validators.required],
+                desc: [values.desc, Validators.required],
+                edit: [values.edit, Validators.pattern('true')]
             };
         };
 
-        const todoItem = () => {                                        // Return a FormBuilder group of item
-            const controls = item();
+        const todoItem = (values) => {                                          // Return a FormBuilder group of item
+            const controls = item(values);
             return this.fb.group(controls);
         };
 
         return {
-            todoItem: todoItem                                          // Reveal todoItem
+            todoItem: todoItem                                                  // Reveal todoItem
         };
     }
 
@@ -35,6 +38,7 @@ export class ReactiveFormComponent implements OnInit {
         private fb: FormBuilder,
         private storageService: StorageService,
     ) {
+        this.todoListSessionValues = this.storageService.getItem(this.todoSessionKey);
         this.createForm();
     }
 
@@ -42,27 +46,31 @@ export class ReactiveFormComponent implements OnInit {
         console.log('test');
     }
 
-    createForm() {                                                      // Create Form
+    createForm() {                                                          // Create Form
         this.todoForm = this.fb.group({
             todoList: this.fb.array([]),
         });
-
-        // this.addItem();                                              // Some quick and dirty item adding
+                                                                            // LoDash get on todoListSessionValues length
+        if (get(this.todoListSessionValues, 'todoList.length')) {
+            this.todoListSessionValues.todoList.forEach((item) => {
+                this.addItem(item);                                         // If we have length, lets initialise each item
+            });
+        }
     }
 
     onSubmit() {
         if (this.todoForm.valid) {
             console.log('VALID: this.todoForm', this.todoForm);
             console.log('this.todoForm.value', this.todoForm.value);
-            this.storageService.setItem('jim-todo', this.todoForm.value);       // Lets set this data to sessionStorage using our storageService
+            this.storageService.setItem(this.todoSessionKey, this.todoForm.value);       // Lets set this data to sessionStorage using our storageService
         } else {
             console.log('INVALID: this.todoForm', this.todoForm);
         }
     }
 
-    addItem() {
+    addItem(values: TodoItem = {name: '', desc: '', edit: false}) {
         const initItem = this.initItem();                               // Init Module for creating todoItem
-        const todoItem = <FormGroupTodo>initItem.todoItem();            // Create FormGroup todoItem via initItem
+        const todoItem = <FormGroupTodo>initItem.todoItem(values);      // Create FormGroup todoItem via initItem
         const todoList = <FormArray>this.todoForm.controls.todoList;    // Reference todoForm todoList
         todoList.push(todoItem);                                        // Push FormGroup to todoList
 
