@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
+import { StorageService } from './services/storage.service';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
         FormsModule,
         ReactiveFormsModule,
     ],
-    providers: [],
+    providers: [
+        StorageService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

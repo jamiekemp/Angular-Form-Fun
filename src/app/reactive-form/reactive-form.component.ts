@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { FormGroupTodo } from './reactive-form.interface';
+import { StorageService } from '../services/storage.service';
 
 @Component({
     selector: 'app-reactive-form',
@@ -30,7 +31,10 @@ export class ReactiveFormComponent implements OnInit {
         };
     }
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder,
+        private storageService: StorageService,
+    ) {
         this.createForm();
     }
 
@@ -47,8 +51,10 @@ export class ReactiveFormComponent implements OnInit {
     }
 
     onSubmit() {
-        if (this.todoForm.valid) {                                      // Just some quick consoles
+        if (this.todoForm.valid) {
             console.log('VALID: this.todoForm', this.todoForm);
+            console.log('this.todoForm.value', this.todoForm.value);
+            this.storageService.setItem('jim-todo', this.todoForm.value);       // Lets set this data to sessionStorage using our storageService
         } else {
             console.log('INVALID: this.todoForm', this.todoForm);
         }
