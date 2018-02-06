@@ -13,6 +13,7 @@ import { FormInputComponent } from './dynamic-form/components/form-input/form-in
 import { FormSelectComponent } from './dynamic-form/components/form-select/form-select.component';
 import { FormButtonComponent } from './dynamic-form/components/form-button/form-button.component';
 import { DynamicFieldDirective } from './dynamic-form/components/dynamic-field/dynamic-field.directive';
+import { FormGroupComponent } from './dynamic-form/components/form-group/form-group.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { DynamicFieldDirective } from './dynamic-form/components/dynamic-field/d
         FormSelectComponent,
         FormButtonComponent,
         DynamicFieldDirective,
+        FormGroupComponent,
     ],
     imports: [
         BrowserModule,
