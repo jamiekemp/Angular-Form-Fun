@@ -1,0 +1,9 @@
+<div class="app">
+    <app-dynamic-form-cont
+        [config]="config"
+        #form="appDynamicForm"
+        (submit)="submit($event)">
+    </app-dynamic-form-cont>
+    {{ form.valid }}
+    {{ form.value | json }}
+</div>

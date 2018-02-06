@@ -1,0 +1,10 @@
+<div
+    class="dynamic-field form-input"
+    [formGroup]="group">
+    {{config | json}}
+    <label>{{ config.label }}</label>
+    <input
+        type="text"
+        [attr.placeholder]="config.placeholder"
+        [formControlName]="config.name" />
+</div>
