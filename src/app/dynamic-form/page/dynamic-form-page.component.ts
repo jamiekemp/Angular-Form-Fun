@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-dynamic-form',
-  templateUrl: './dynamic-form.component.html'
+  selector: 'app-dynamic-form-page',
+  templateUrl: './dynamic-form-page.component.html'
 })
-export class DynamicFormComponent {
+export class DynamicFormPageComponent {
+
     config = [
         {
             type: 'input',

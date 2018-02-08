@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+
 import { FieldConfig } from '../models/field-config.interface';
 
 @Component({
   exportAs: 'appDynamicForm',
-  selector: 'app-dynamic-form-cont',
-  templateUrl: './dynamic-form-cont.component.html'
+  selector: 'app-dynamic-form',
+  templateUrl: './dynamic-form.component.html'
 })
-export class DynFormContComponent implements OnChanges, OnInit {
+export class DynamicFormComponent implements OnChanges, OnInit {
     @Input()
     config: FieldConfig[] = [];
 

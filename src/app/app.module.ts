@@ -7,40 +7,22 @@ import { AppComponent } from './app.component';
 
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { StorageService } from './services/storage.service';
-import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
-import { DynFormContComponent } from './dynamic-form/components/dyn-form-cont/dynamic-form-cont.component';
-import { FormInputComponent } from './dynamic-form/components/form-input/form-input.component';
-import { FormSelectComponent } from './dynamic-form/components/form-select/form-select.component';
-import { FormButtonComponent } from './dynamic-form/components/form-button/form-button.component';
-import { DynamicFieldDirective } from './dynamic-form/components/dynamic-field/dynamic-field.directive';
-import { FormGroupComponent } from './dynamic-form/components/form-group/form-group.component';
+import { DynamicFormPageComponent } from './dynamic-form/page/dynamic-form-page.component';
+import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         ReactiveFormComponent,
-        DynamicFormComponent,
-        DynFormContComponent,
-        FormInputComponent,
-        FormSelectComponent,
-        FormButtonComponent,
-        DynamicFieldDirective,
-        FormGroupComponent,
+        DynamicFormPageComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        ReactiveFormsModule
-    ],
-    exports: [
-        DynamicFormComponent
-    ],
-    entryComponents: [
-        FormButtonComponent,
-        FormInputComponent,
-        FormSelectComponent,
+        ReactiveFormsModule,
+        DynamicFormModule
     ],
     providers: [
         StorageService
