@@ -1,13 +1,13 @@
 import { FormGroup } from '@angular/forms';
 
 export interface FormGroupTodo extends FormGroup {
-    locked:         boolean;
-    cachedValue:    object;
-    index:          Function;
     toggleEdit:     Function;
     cancelEdit:     Function;
     canCancel:      Function;
     remove:         Function;
+    index:          Function;
+    locked:         boolean;
+    cachedValue:    object;
 }
 
 export interface TodoItem {
@@ -15,5 +15,6 @@ export interface TodoItem {
     desc:       string;
     confirmed:  boolean;
 }
+
 
 

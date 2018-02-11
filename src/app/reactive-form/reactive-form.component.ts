@@ -32,7 +32,7 @@ export class ReactiveFormComponent implements OnInit {
         return {
             todoItem: todoItem                                                  // Reveal todoItem
         };
-    }
+    };
 
     constructor(private fb: FormBuilder,
                 private storageService: StorageService) {
@@ -67,14 +67,17 @@ export class ReactiveFormComponent implements OnInit {
     }
 
     addItem(values: TodoItem = {name: '', desc: '', confirmed: false}) {
-        const initItem = this.initItem();                               // Init Module for creating todoItem
-        const todoItem = <FormGroupTodo>initItem.todoItem(values);      // Create FormGroup todoItem via initItem
-        const todoList = <FormArray>this.todoForm.controls.todoList;    // Reference todoForm todoList
-        todoList.push(todoItem);                                        // Push FormGroup to todoList
+        const todoItem = <FormGroupTodo>this.initItem().todoItem(values);       // Create FormGroup todoItem via initItem
+        const todoList = <FormArray>this.todoForm.controls.todoList;            // Reference todoForm todoList
+        todoList.push(todoItem);                                                // Push FormGroup to todoList
 
         todoItem.index = () => {
-            return todoList.controls.indexOf(todoItem);                 // Get the index of this item
+            return todoList.controls.indexOf(todoItem);                         // Get the index of this item
         };
+
+        // Object.defineProperty(todoItem, 'index', {
+        //     get: function() { return todoList.controls.indexOf(todoItem); }
+        // });
 
         todoItem.toggleEdit = () => {
             todoItem.value.confirmed ? todoItem.cachedValue = todoItem.value : delete todoItem.cachedValue;         // Create cached value or delete it
@@ -91,6 +94,4 @@ export class ReactiveFormComponent implements OnInit {
             todoList.removeAt(todoItem.index());                        // Remove item from todoList based on it's index in todoList
         };
     }
-
-
 }
