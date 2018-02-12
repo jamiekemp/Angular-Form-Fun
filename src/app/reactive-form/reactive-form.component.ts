@@ -15,7 +15,7 @@ export class ReactiveFormComponent implements OnInit {
     todoListSessionValues: any;
     todoSessionKey = 'jim-todo';
 
-    initItem: Function = () => {
+    get initItem() {
         const item = (values) => {                                              // Init item
             return {
                 name:       [values.name, Validators.required],
@@ -32,7 +32,7 @@ export class ReactiveFormComponent implements OnInit {
         return {
             todoItem: todoItem                                                  // Reveal todoItem
         };
-    };
+    }
 
     constructor(private fb: FormBuilder,
                 private storageService: StorageService) {
@@ -43,6 +43,19 @@ export class ReactiveFormComponent implements OnInit {
     ngOnInit() {
         console.log(`Jimbo's Todo List!`);
     }
+
+    // Alternative to above get initItem() - Cleaner, but less interesting pattern!
+    // Would really use this commented version for production. Getter with R Mod Pattern probably better suited if revealing multiple construction types/items
+    //
+    // initTodoItem(values) {
+    //     const controls = {
+    //             name:       [values.name, Validators.required],
+    //             desc:       [values.desc, Validators.required],
+    //             confirmed:  [values.confirmed, Validators.pattern('true')]
+    //     };
+    //
+    //     return this.fb.group(controls);
+    // }
 
     createForm() {                                                          // Create Form
         this.todoForm = this.fb.group({
@@ -67,7 +80,8 @@ export class ReactiveFormComponent implements OnInit {
     }
 
     addItem(values: TodoItem = {name: '', desc: '', confirmed: false}) {
-        const todoItem = <FormGroupTodo>this.initItem().todoItem(values);       // Create FormGroup todoItem via initItem
+        const todoItem = <FormGroupTodo>this.initItem.todoItem(values);         // Create FormGroup todoItem via initItem
+        // const todoItem = <FormGroupTodo>this.initTodoItem(values);           // Create FormGroup todoItem via initItem ALTERNATIVE
         const todoList = <FormArray>this.todoForm.controls.todoList;            // Reference todoForm todoList
         todoList.push(todoItem);                                                // Push FormGroup to todoList
 
