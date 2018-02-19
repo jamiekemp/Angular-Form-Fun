@@ -1,6 +1,7 @@
 import { ValidatorFn } from '@angular/forms';
 
 export interface FieldConfig {
+  groups?: any[];
   disabled?: boolean;
   label?: string;
   name: string;
