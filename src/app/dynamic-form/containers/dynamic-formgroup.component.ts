@@ -18,8 +18,8 @@ export class DynamicFormgroupComponent implements OnChanges, OnInit {
     form: FormGroup;
 
     // get controls() { return this.config.filter(({type}) => type !== 'button'); }
-    get groups() { return this.groupConfig.filter(({type}) => type === 'group'; }
-    get controls() { this.groupConfig.filter(({type}) => type !== 'button' && type !== 'group'); }
+    get groups() { return this.groupConfig.filter(({type}) => type === 'group'); }
+    get controls() { return this.groupConfig.filter(({type}) => type !== 'button' && type !== 'group'); }
     get changes() { return this.form.valueChanges; }
     get valid() { return this.form.valid; }
     get value() { return this.form.value; }
