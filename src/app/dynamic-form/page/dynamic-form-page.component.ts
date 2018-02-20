@@ -48,7 +48,7 @@ export class DynamicFormPageComponent {
                     placeholder: 'Enter your email',
                 },
             ],
-            groups: [
+            groupConfig: [
                 {
                     type: 'group',
                     name: 'Father',

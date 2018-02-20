@@ -80,8 +80,8 @@ export class DynamicFormgroupComponent implements OnChanges, OnInit {
         let controlsConfig = {};
         const groupConfig = {};
         groups.forEach(group => {
-            if (group.groups) {
-                controlsConfig = this.createFormGroup(group.groups);
+            if (group.groupConfig) {
+                controlsConfig = this.createFormGroup(group.groupConfig);
             }
             const initGroup = this.fb.group(controlsConfig);
             group.controls.forEach(control => initGroup.addControl(control.name, this.createControl(control)));
