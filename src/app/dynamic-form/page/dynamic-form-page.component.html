@@ -1,9 +1,22 @@
+app-dynamic-form
+<div class="app">
+    <app-dynamic-form
+        [config]="config"
+        #form="appDynamicForm"
+        (submit)="submit($event)">
+    </app-dynamic-form>
+    {{ form.valid }}
+    {{ form.value | json }}
+</div>
+<hr>
+app-dynamic-formgroup
 <div class="app">
     <app-dynamic-formgroup
-        [config]="config"
+        [groupConfig]="groupConfig"
         #form="appDynamicFormgroup"
         (submit)="submit($event)">
     </app-dynamic-formgroup>
     {{ form.valid }}
     {{ form.value | json }}
 </div>
+

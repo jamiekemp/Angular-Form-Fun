@@ -10,7 +10,7 @@ import { FieldConfig } from '../models/field-config.interface';
 })
 export class DynamicFormgroupComponent implements OnChanges, OnInit {
     @Input()
-    config: FieldConfig;
+    groupConfig: FieldConfig[] = [];
 
     @Output()
     submit: EventEmitter<any> = new EventEmitter<any>();
@@ -18,7 +18,8 @@ export class DynamicFormgroupComponent implements OnChanges, OnInit {
     form: FormGroup;
 
     // get controls() { return this.config.filter(({type}) => type !== 'button'); }
-    get groups() { return this.config.groups; }
+    get groups() { return this.groupConfig.filter(({type}) => type === 'group'; }
+    get controls() { this.groupConfig.filter(({type}) => type !== 'button' && type !== 'group'); }
     get changes() { return this.form.valueChanges; }
     get valid() { return this.form.valid; }
     get value() { return this.form.value; }
@@ -27,6 +28,7 @@ export class DynamicFormgroupComponent implements OnChanges, OnInit {
 
     ngOnInit() {
         this.form = this.createForm();
+        // this.createForm();
         console.log(this.form);
     }
 
@@ -50,11 +52,16 @@ export class DynamicFormgroupComponent implements OnChanges, OnInit {
     }
 
     // createForm() {
-    //     this.yourDetailsForm = this.fb.group({ // <-- the parent FormGroup
+    //     this.form = this.fb.group({ // <-- the parent FormGroup
     //         personal: this.fb.group({
     //             firstName: [''],
     //             lastName:  [''],
     //             email:     [''],
+    //             personal: this.fb.group({
+    //                 firstName: [''],
+    //                 lastName:  [''],
+    //                 email:     [''],
+    //             })
     //         }),
     //         address: this.fb.group({
     //             address1: [''],
@@ -66,20 +73,24 @@ export class DynamicFormgroupComponent implements OnChanges, OnInit {
     // }
 
     createForm() {
-        const controlsConfig = {};
-        this.groups.forEach(group => {
-            const initGroup = this.fb.group({});
-            group.controls.forEach(control => initGroup.addControl(control.name, this.createControl(control)));
-            controlsConfig[group.name] = initGroup;
-        });
-        return this.fb.group(controlsConfig);
+        return this.fb.group(this.createFormGroup(this.groups));
     }
 
-    // createGroup() {
-    //     const group = this.fb.group({});
-    //     this.controls.forEach(control => group.addControl(control.name, this.createControl(control)));
-    //     return group;
-    // }
+    createFormGroup(groups) {
+        let controlsConfig = {};
+        const groupConfig = {};
+        groups.forEach(group => {
+            if (group.groups) {
+                controlsConfig = this.createFormGroup(group.groups);
+            }
+            const initGroup = this.fb.group(controlsConfig);
+            group.controls.forEach(control => initGroup.addControl(control.name, this.createControl(control)));
+            groupConfig[group.name] = initGroup;
+            // group.controls.forEach(control => controlsConfig[control.name] = ['']);
+            // groupConfig[group.name] = this.fb.group(controlsConfig);
+        });
+        return groupConfig;
+    }
 
     createControl(config: FieldConfig) {
         const { disabled, validation, value } = config;
