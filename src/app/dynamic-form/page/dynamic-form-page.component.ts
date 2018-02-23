@@ -6,25 +6,13 @@ import { Component } from '@angular/core';
 })
 export class DynamicFormPageComponent {
 
-    groupConfig = [
-        {
-            type: 'input',
-            label: 'Full name',
-            name: 'name',
-            placeholder: 'Enter your name',
-        },
-        {
-            type: 'select',
-            label: 'Favourite food',
-            name: 'food',
-            options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
-            placeholder: 'Select an option',
-        },
-        {
-            label: 'Submit',
-            name: 'submit',
-            type: 'button',
-        },
+    formConfig = [
+        // {
+        //     type: 'input',
+        //     label: 'Reference',
+        //     name: 'reference',
+        //     placeholder: 'Enter your reference',
+        // },
         {
             type: 'group',
             name: 'personal',
@@ -40,6 +28,7 @@ export class DynamicFormPageComponent {
                     label: 'Last name',
                     name: 'lastname',
                     placeholder: 'Enter your first name',
+
                 },
                 {
                     type: 'input',
@@ -47,11 +36,9 @@ export class DynamicFormPageComponent {
                     name: 'email',
                     placeholder: 'Enter your email',
                 },
-            ],
-            groupConfig: [
                 {
                     type: 'group',
-                    name: 'Father',
+                    name: 'father',
                     controls: [
                         {
                             type: 'input',
@@ -71,33 +58,9 @@ export class DynamicFormPageComponent {
                             name: 'email',
                             placeholder: 'Enter your email',
                         },
-                    ]
+                    ],
                 },
-                {
-                    type: 'group',
-                    name: 'Mother',
-                    controls: [
-                        {
-                            type: 'input',
-                            label: 'First name',
-                            name: 'firstname',
-                            placeholder: 'Enter your first name',
-                        },
-                        {
-                            type: 'input',
-                            label: 'Last name',
-                            name: 'lastname',
-                            placeholder: 'Enter your first name',
-                        },
-                        {
-                            type: 'input',
-                            label: 'Email',
-                            name: 'email',
-                            placeholder: 'Enter your email',
-                        },
-                    ]
-                }
-            ]
+            ],
         },
         {
             type: 'group',
@@ -128,6 +91,11 @@ export class DynamicFormPageComponent {
                     placeholder: 'Enter your postcode',
                 },
             ]
+        },
+        {
+            label: 'Submit',
+            name: 'submit',
+            type: 'button',
         }
     ];
 

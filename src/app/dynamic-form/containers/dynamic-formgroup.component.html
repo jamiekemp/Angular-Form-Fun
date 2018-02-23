@@ -3,7 +3,7 @@
     [formGroup]="form"
     (submit)="handleSubmit($event)">
     <ng-container
-        *ngFor="let field of groupConfig;"
+        *ngFor="let field of formConfig;"
         appDynamicField
         [config]="field"
         [group]="form">

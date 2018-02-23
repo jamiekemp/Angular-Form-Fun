@@ -8,6 +8,7 @@ import { DynamicFormgroupComponent } from './containers/dynamic-formgroup.compon
 import { FormInputComponent } from './components/form-input/form-input.component';
 import { FormSelectComponent } from './components/form-select/form-select.component';
 import { FormButtonComponent } from './components/form-button/form-button.component';
+import { FormGroupComponent } from './components/form-group/form-group.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { FormButtonComponent } from './components/form-button/form-button.compon
         FormInputComponent,
         FormSelectComponent,
         FormButtonComponent,
+        FormGroupComponent,
     ],
     exports: [
         DynamicFormComponent,
@@ -31,6 +33,7 @@ import { FormButtonComponent } from './components/form-button/form-button.compon
         FormButtonComponent,
         FormInputComponent,
         FormSelectComponent,
+        FormGroupComponent,
     ]
 })
 export class DynamicFormModule {

@@ -4,13 +4,15 @@ import { FormGroup } from '@angular/forms';
 import { FormButtonComponent } from '../form-button/form-button.component';
 import { FormInputComponent } from '../form-input/form-input.component';
 import { FormSelectComponent } from '../form-select/form-select.component';
+import { FormGroupComponent } from '../form-group/form-group.component';
 import { Field } from '../../models/field.interface';
 
 
 const components = {
     button: FormButtonComponent,
     input: FormInputComponent,
-    select: FormSelectComponent
+    select: FormSelectComponent,
+    group: FormGroupComponent
 };
 
 
