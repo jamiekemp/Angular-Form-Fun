@@ -7,12 +7,12 @@ import { Component } from '@angular/core';
 export class DynamicFormPageComponent {
 
     formConfig = [
-        // {
-        //     type: 'input',
-        //     label: 'Reference',
-        //     name: 'reference',
-        //     placeholder: 'Enter your reference',
-        // },
+        {
+            type: 'input',
+            label: 'Reference',
+            name: 'reference',
+            placeholder: 'Enter your reference',
+        },
         {
             type: 'group',
             name: 'personal',
@@ -35,10 +35,40 @@ export class DynamicFormPageComponent {
                     label: 'Email',
                     name: 'email',
                     placeholder: 'Enter your email',
-                },
+                }
+            ],
+        },
+        {
+            type: 'group',
+            name: 'parents',
+            controls: [
                 {
                     type: 'group',
                     name: 'father',
+                    controls: [
+                        {
+                            type: 'input',
+                            label: 'First name',
+                            name: 'firstname',
+                            placeholder: 'Enter your first name',
+                        },
+                        {
+                            type: 'input',
+                            label: 'Last name',
+                            name: 'lastname',
+                            placeholder: 'Enter your first name',
+                        },
+                        {
+                            type: 'input',
+                            label: 'Email',
+                            name: 'email',
+                            placeholder: 'Enter your email',
+                        },
+                    ],
+                },
+                {
+                    type: 'group',
+                    name: 'mother',
                     controls: [
                         {
                             type: 'input',
@@ -91,6 +121,12 @@ export class DynamicFormPageComponent {
                     placeholder: 'Enter your postcode',
                 },
             ]
+        },
+        {
+            type: 'input',
+            label: 'Signature',
+            name: 'signature',
+            placeholder: 'Please sign',
         },
         {
             label: 'Submit',
