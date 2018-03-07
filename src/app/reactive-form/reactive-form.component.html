@@ -1,4 +1,4 @@
-Example of reactive form that supports dynamic add/remove/edit/confirm/cancel functions on items with methods on themselves.<br><br>
+Example of reactive form that supports dynamic add/remove/edit/confirm/cancel functions on items with methods on themselves. Session storage service to read/write.<br><br>
 <div class="grid-x">
     <div class="small-10 cell">
         <form [formGroup]="todoForm" (ngSubmit)="onSubmit(todoForm)" novalidate>
@@ -38,7 +38,7 @@ Example of reactive form that supports dynamic add/remove/edit/confirm/cancel fu
             </div>
 
             <button (click)="addItem()" type="button" class="button">Add</button>
-            <button type="submit" class="button secondary">Submit</button>
+            <button type="submit" class="button secondary">Save to Session Storage</button>
         </form>
     </div>
 </div>

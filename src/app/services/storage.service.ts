@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { get, set , unset} from 'lodash';
+import { get, set, unset} from 'lodash';
 
 @Injectable()
 export class StorageService {
