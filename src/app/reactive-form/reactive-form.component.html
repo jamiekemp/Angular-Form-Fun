@@ -1,4 +1,4 @@
-<!-- JIMTODO LIST -->
+Example of reactive form that supports dynamic add/remove/edit/confirm/cancel functions on items with methods on themselves.<br><br>
 <div class="grid-x">
     <div class="small-10 cell">
         <form [formGroup]="todoForm" (ngSubmit)="onSubmit(todoForm)" novalidate>
@@ -11,7 +11,7 @@
 
                             <div class="grid-x align-middle">
                                 <div class="small-12 cell">
-                                    <label [for]="'name-'+i+1" [id]="'name-label-'+i+1">Todo: {{i+1}}</label>
+                                    <label [for]="'name-'+i+1" [id]="'name-label-'+i+1">Title: {{i+1}}</label>
                                     <input [readonly]="todo.value.confirmed" formControlName="name" [name]="'name-'+i+1" type="text">
                                 </div>
                             </div>
@@ -26,8 +26,8 @@
                             <div class="grid-x align-middle">
                                 <div class="small-12 cell">
                                     <button type="button" class="button" (click)="todo.toggleEdit()">{{todo.value.confirmed ? 'Edit' : 'Confirm'}}</button>
-                                    <button type="button" class="button secondary" (click)="todo.cancelEdit()" *ngIf="todo.cachedValue">Cancel confirmed</button>
-                                    <button type="button" class="button secondary" (click)="todo.remove()">Remove</button>
+                                    <button type="button" class="button secondary" *ngIf="todo.cachedValue"  (click)="todo.cancelEdit()">Cancel edit</button>
+                                    <button type="button" class="button secondary" *ngIf="!todo.cachedValue" (click)="todo.remove()">Remove</button>
                                 </div>
                             </div>
                             <hr>
