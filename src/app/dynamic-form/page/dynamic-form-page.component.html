@@ -1,21 +1,11 @@
-<!--app-dynamic-form-->
-<!--<div class="app">-->
-    <!--<app-dynamic-form-->
-        <!--[config]="config"-->
-        <!--#form="appDynamicForm"-->
-        <!--(submit)="submit($event)">-->
-    <!--</app-dynamic-form>-->
-    <!--{{ form.valid }}-->
-    <!--{{ form.value | json }}-->
-<!--</div>-->
-<!--<hr>-->
+This is a reworking of Todd Motto's Dynamic forms code, now with added infinite nested form-group support.<br><br>
 <div class="app">
     <app-dynamic-formgroup
-        [formConfig]="formConfig"
+        [config]="config"
         #form="appDynamicFormgroup"
         (submit)="submit($event)">
     </app-dynamic-formgroup>
-    <!--{{ form.valid }}-->
-    <!--{{ form.value | json }}-->
+    form.valid = {{ form.valid }}<br>
+    form.value =<br> <pre>{{ form.value | json }}</pre>
 </div>
 

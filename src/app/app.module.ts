@@ -7,8 +7,10 @@ import { AppComponent } from './app.component';
 
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { StorageService } from './services/storage.service';
-import { DynamicFormPageComponent } from './dynamic-form/page/dynamic-form-page.component';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
+import { DynamicFormPageComponent } from './dynamic-form/page/dynamic-form-page.component';
+import { DynamicFormToddModule } from './dynamic-form-todd/dynamic-form-todd.module';
+import { DynamicFormToddPageComponent } from './dynamic-form-todd/page/dynamic-form-page.component';
 
 
 @NgModule({
@@ -16,13 +18,15 @@ import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
         AppComponent,
         ReactiveFormComponent,
         DynamicFormPageComponent,
+        DynamicFormToddPageComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        DynamicFormModule
+        DynamicFormModule,
+        DynamicFormToddModule,
     ],
     providers: [
         StorageService

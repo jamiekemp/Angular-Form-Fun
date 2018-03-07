@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 })
 export class DynamicFormPageComponent {
 
-    formConfig = [
+    config = [
         {
             type: 'input',
             label: 'Reference',
@@ -127,27 +127,6 @@ export class DynamicFormPageComponent {
             label: 'Signature',
             name: 'signature',
             placeholder: 'Please sign',
-        },
-        {
-            label: 'Submit',
-            name: 'submit',
-            type: 'button',
-        }
-    ];
-
-    config = [
-        {
-            type: 'input',
-            label: 'Full name',
-            name: 'name',
-            placeholder: 'Enter your name',
-        },
-        {
-            type: 'select',
-            label: 'Favourite food',
-            name: 'food',
-            options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
-            placeholder: 'Select an option',
         },
         {
             label: 'Submit',

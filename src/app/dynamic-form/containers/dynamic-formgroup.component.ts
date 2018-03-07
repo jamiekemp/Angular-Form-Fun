@@ -10,7 +10,7 @@ import { FieldConfig } from '../models/field-config.interface';
 })
 export class DynamicFormgroupComponent implements OnChanges, OnInit {
     @Input()
-    formConfig: FieldConfig[] = [];
+    config: FieldConfig[] = [];
 
     @Output()
     submit: EventEmitter<any> = new EventEmitter<any>();
@@ -20,8 +20,8 @@ export class DynamicFormgroupComponent implements OnChanges, OnInit {
     filterGroups   = (items) => items.filter(({type}) => type === 'group');
     filterControls = (items) => items.filter(({type}) => type !== 'group' && type !== 'button');
 
-    get groups()   { return this.filterGroups(this.formConfig); }
-    get controls() { return this.filterControls(this.formConfig); }
+    get groups()   { return this.filterGroups(this.config); }
+    get controls() { return this.filterControls(this.config); }
     get changes()  { return this.form.valueChanges; }
     get valid()    { return this.form.valid; }
     get value()    { return this.form.value; }
@@ -90,7 +90,7 @@ export class DynamicFormgroupComponent implements OnChanges, OnInit {
             }
             // const initGroup = this.fb.group(controlsConfig);
             // group.controls.forEach(control => initGroup.addControl(control.name, this.createControl(control)));
-            // formConfig[group.name] = initGroup;
+            // config[group.name] = initGroup;
             const controls = this.filterControls(item.controls);
             controls.forEach(control => controlsConfig[control.name] = ['']);
             formGroup[item.name] = this.fb.group(controlsConfig);
