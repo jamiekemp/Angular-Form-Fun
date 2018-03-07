@@ -1,0 +1,12 @@
+<div class="formgroup">
+    <legend>Formgroup | {{config.name}}</legend>
+    <ng-container
+        *ngFor="let field of config.controls;"
+        appDynamicField
+        [config]="field"
+        [group]="group.controls[config.name]">
+    </ng-container>
+</div>
+
+
+

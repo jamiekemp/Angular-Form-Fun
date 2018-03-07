@@ -1,0 +1,11 @@
+This is a reworking of Todd Motto's Dynamic forms code, now with added infinite nested form-group support.<br><br>
+<div class="app">
+    <app-dynamic-formgroup
+        [config]="config"
+        #form="appDynamicFormgroup"
+        (submit)="submit($event)">
+    </app-dynamic-formgroup>
+    form.valid = {{ form.valid }}<br>
+    form.value =<br> <pre>{{ form.value | json }}</pre>
+</div>
+

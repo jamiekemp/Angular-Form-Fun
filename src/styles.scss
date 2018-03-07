@@ -1,8 +1,19 @@
-@import url('https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css');
+//@import url('https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css');
+@import url('./assets/css/foundation.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.9.1/tachyons.min.css');
+//@import url('https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.9.1/tachyons.min.css');
+@import url('./assets/css/tachyons.min.css');
 
 /* You can add global styles to this file, and also import other style files */
 body {
     padding: 30px;
+}
+
+form {
+    width: 300px;
+}
+
+.formgroup {
+    padding-left: 10px;
+    border-left: 1px dashed green;
 }
