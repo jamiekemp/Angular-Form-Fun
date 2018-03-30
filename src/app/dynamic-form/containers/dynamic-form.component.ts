@@ -4,9 +4,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { FieldConfig } from '../models/field-config.interface';
 
 @Component({
-  exportAs: 'appDynamicForm',
-  selector: 'app-dynamic-form',
-  templateUrl: './dynamic-form.component.html'
+    exportAs: 'appDynamicForm',
+    selector: 'app-dynamic-form',
+    templateUrl: './dynamic-form.component.html'
 })
 export class DynamicFormComponent implements OnChanges, OnInit {
     @Input()
@@ -17,17 +17,23 @@ export class DynamicFormComponent implements OnChanges, OnInit {
 
     form: FormGroup;
 
-    get controls() { return this.config.filter(({type}) => type !== 'button'); }
-    get changes() { return this.form.valueChanges; }
-    get valid() { return this.form.valid; }
-    get value() { return this.form.value; }
+    filterGroups   = (items) => items.filter(({type}) => type === 'group');
+    filterControls = (items) => items.filter(({type}) => type !== 'group' && type !== 'button');
+
+    get groups()   { return this.filterGroups(this.config); }
+    get controls() { return this.filterControls(this.config); }
+    get changes()  { return this.form.valueChanges; }
+    get valid()    { return this.form.valid; }
+    get value()    { return this.form.value; }
 
     constructor(private fb: FormBuilder) {}
 
     ngOnInit() {
-        this.form = this.createGroup();
+        this.form = this.createForm();
+        console.log('form', this.form);
     }
 
+    // TODO: Need to dig into this, so far seemed unnecessary
     ngOnChanges() {
         if (this.form) {
             const controls = Object.keys(this.form.controls);
@@ -47,10 +53,25 @@ export class DynamicFormComponent implements OnChanges, OnInit {
         }
     }
 
-    createGroup() {
-        const group = this.fb.group({});
-        this.controls.forEach(control => group.addControl(control.name, this.createControl(control)));
-        return group;
+    createForm() {
+        const thisForm = this.createFormGroup(this.groups);
+        this.controls.forEach(control => thisForm[control.name] = ['']);
+        return this.fb.group(thisForm);
+    }
+
+    createFormGroup(groups) {
+        let controlsConfig = {};
+        const formGroup = {};
+        groups.forEach(item => {
+            const innerGroups = this.filterGroups(item.controls);
+            if (innerGroups.length) {
+                controlsConfig = this.createFormGroup(innerGroups);
+            }
+            const controls = this.filterControls(item.controls);
+            controls.forEach(control => controlsConfig[control.name] = ['']);
+            formGroup[item.name] = this.fb.group(controlsConfig);
+        });
+        return formGroup;
     }
 
     createControl(config: FieldConfig) {
@@ -64,6 +85,7 @@ export class DynamicFormComponent implements OnChanges, OnInit {
         this.submit.emit(this.value);
     }
 
+    // TODO: Need to dig into this
     setDisabled(name: string, disable: boolean) {
         if (this.form.controls[name]) {
             const method = disable ? 'disable': 'enable';
@@ -79,6 +101,7 @@ export class DynamicFormComponent implements OnChanges, OnInit {
         });
     }
 
+    // TODO: Need to dig into this
     setValue(name: string, value: any) {
         this.form.controls[name].setValue(value, {emitEvent: true});
     }

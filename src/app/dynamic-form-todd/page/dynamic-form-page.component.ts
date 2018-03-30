@@ -1,7 +1,7 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { DynamicFormComponent } from '../containers/dynamic-form/dynamic-form.component';
+import { DynamicFormComponent } from '../containers/dynamic-form.component';
 import { FieldConfig } from '../models/field-config.interface';
 
 

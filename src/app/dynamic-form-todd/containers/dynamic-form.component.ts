@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
-import { FieldConfig } from '../../models/field-config.interface';
+import { FieldConfig } from '../models/field-config.interface';
 
 @Component({
   exportAs: 'dynamicForm',

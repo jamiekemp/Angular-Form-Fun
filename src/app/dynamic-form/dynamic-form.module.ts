@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.directive';
 import { DynamicFormComponent } from './containers/dynamic-form.component';
-import { DynamicFormgroupComponent } from './containers/dynamic-formgroup.component';
 import { FormInputComponent } from './components/form-input/form-input.component';
 import { FormSelectComponent } from './components/form-select/form-select.component';
 import { FormButtonComponent } from './components/form-button/form-button.component';
@@ -19,7 +18,6 @@ import { FormGroupComponent } from './components/form-group/form-group.component
     declarations: [
         DynamicFieldDirective,
         DynamicFormComponent,
-        DynamicFormgroupComponent,
         FormInputComponent,
         FormSelectComponent,
         FormButtonComponent,
@@ -27,7 +25,6 @@ import { FormGroupComponent } from './components/form-group/form-group.component
     ],
     exports: [
         DynamicFormComponent,
-        DynamicFormgroupComponent
     ],
     entryComponents: [
         FormButtonComponent,
