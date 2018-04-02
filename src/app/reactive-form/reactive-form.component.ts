@@ -71,6 +71,7 @@ export class ReactiveFormComponent implements OnInit {
         //     get: function() { return todoList.controls.indexOf(todoItem); }
         // });
 
+        // TODO: Explore intercepting original data to a copy (ngChanges..?), so original data remains intact (see issue refreshing without confirming)
         todoItem.toggleEdit = () => {
             todoItem.value.confirmed ? todoItem.cachedValue = todoItem.value : delete todoItem.cachedValue;         // Create cached value or delete it
             const confirmedValue = todoItem.value.confirmed;                                                        // Get todoForm todoList locked value
