@@ -15,25 +15,6 @@ export class ReactiveFormComponent implements OnInit {
     todoListSessionValues: any;
     todoSessionKey = 'jim-todo';
 
-    get initItem() {
-        const item = (values) => {                                              // Init item
-            return {
-                name:       [values.name, Validators.required],
-                desc:       [values.desc, Validators.required],
-                confirmed:  [values.confirmed, Validators.pattern('true')]
-            };
-        };
-
-        const todoItem = (values) => {                                          // Return a FormBuilder group of item
-            const controls = item(values);
-            return this.fb.group(controls);
-        };
-
-        return {
-            todoItem: todoItem                                                  // Reveal todoItem
-        };
-    }
-
     constructor(private fb: FormBuilder,
                 private storageService: StorageService) {
         this.todoListSessionValues = this.storageService.getItem(this.todoSessionKey);
@@ -44,18 +25,15 @@ export class ReactiveFormComponent implements OnInit {
         console.log(`Jimbo's Todo List!`);
     }
 
-    // Alternative to above get initItem() - Cleaner, but less interesting pattern!
-    // Would really use this commented version for production. Getter with R Mod Pattern probably better suited if revealing multiple construction types/items
-    //
-    // initTodoItem(values) {
-    //     const controls = {
-    //             name:       [values.name, Validators.required],
-    //             desc:       [values.desc, Validators.required],
-    //             confirmed:  [values.confirmed, Validators.pattern('true')]
-    //     };
-    //
-    //     return this.fb.group(controls);
-    // }
+    initTodoItem(values) {
+        const controls = {                                                  // Init item
+                name:       [values.name, Validators.required],
+                desc:       [values.desc, Validators.required],
+                confirmed:  [values.confirmed, Validators.pattern('true')]
+        };
+
+        return this.fb.group(controls);                                     // Return a FormBuilder group of item
+    }
 
     createForm() {                                                          // Create Form
         this.todoForm = this.fb.group({
@@ -80,7 +58,7 @@ export class ReactiveFormComponent implements OnInit {
     }
 
     addItem(values: TodoItem = {name: '', desc: '', confirmed: false}) {
-        const todoItem = <FormGroupTodo>this.initItem.todoItem(values);         // Create FormGroup todoItem via initItem
+        const todoItem = <FormGroupTodo>this.initTodoItem(values);              // Create FormGroup todoItem via initItem
         // const todoItem = <FormGroupTodo>this.initTodoItem(values);           // Create FormGroup todoItem via initItem ALTERNATIVE
         const todoList = <FormArray>this.todoForm.controls.todoList;            // Reference todoForm todoList
         todoList.push(todoItem);                                                // Push FormGroup to todoList
