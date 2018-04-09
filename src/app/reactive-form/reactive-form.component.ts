@@ -39,8 +39,8 @@ export class ReactiveFormComponent implements OnInit {
         this.todoForm = this.fb.group({
             todoList: this.fb.array([]),
         });
-                                                                            // LoDash get on todoListSessionValues length
-        if (get(this.todoListSessionValues, 'todoList.length')) {
+
+        if (get(this.todoListSessionValues, 'todoList.length')) {     // LoDash get on todoListSessionValues length
             this.todoListSessionValues.todoList.forEach((item) => {
                 this.addItem(item);                                         // If we have length, lets initialise each item
             });
@@ -59,7 +59,6 @@ export class ReactiveFormComponent implements OnInit {
 
     addItem(values: TodoItem = {name: '', desc: '', confirmed: false}) {
         const todoItem = <FormGroupTodo>this.initTodoItem(values);              // Create FormGroup todoItem via initItem
-        // const todoItem = <FormGroupTodo>this.initTodoItem(values);           // Create FormGroup todoItem via initItem ALTERNATIVE
         const todoList = <FormArray>this.todoForm.controls.todoList;            // Reference todoForm todoList
         todoList.push(todoItem);                                                // Push FormGroup to todoList
 
@@ -71,7 +70,7 @@ export class ReactiveFormComponent implements OnInit {
         //     get: function() { return todoList.controls.indexOf(todoItem); }
         // });
 
-        // TODO: Explore intercepting original data to a copy (ngChanges..?), so original data remains intact
+        // TODO: Explore intercepting original data to a copy (ngChanges..?), so original data remains intact / immutable
         todoItem.toggleEdit = () => {
             todoItem.value.confirmed ? todoItem.cachedValue = todoItem.value : delete todoItem.cachedValue;         // Create cached value or delete it
             const confirmedValue = todoItem.value.confirmed;                                                        // Get todoForm todoList locked value
