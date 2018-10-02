@@ -7,10 +7,12 @@ import { AppComponent } from './app.component';
 
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { StorageService } from './services/storage.service';
+import { SessionTimerService } from './services/session-timer.service';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { DynamicFormPageComponent } from './dynamic-form/page/dynamic-form-page.component';
 import { DynamicFormToddModule } from './dynamic-form-todd/dynamic-form-todd.module';
 import { DynamicFormToddPageComponent } from './dynamic-form-todd/page/dynamic-form-page.component';
+import { SessionTimerComponent } from './session-timer/session-timer.component';
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import { DynamicFormToddPageComponent } from './dynamic-form-todd/page/dynamic-f
         ReactiveFormComponent,
         DynamicFormPageComponent,
         DynamicFormToddPageComponent,
+        SessionTimerComponent,
     ],
     imports: [
         BrowserModule,
@@ -29,7 +32,8 @@ import { DynamicFormToddPageComponent } from './dynamic-form-todd/page/dynamic-f
         DynamicFormToddModule,
     ],
     providers: [
-        StorageService
+        StorageService,
+        SessionTimerService
     ],
     bootstrap: [AppComponent]
 })
