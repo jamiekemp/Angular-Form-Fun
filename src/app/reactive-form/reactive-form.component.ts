@@ -22,6 +22,7 @@ export class ReactiveFormComponent implements OnInit {
     }
 
     ngOnInit() {
+
         console.log(`Jimbo's Todo List!`);
     }
 
@@ -71,6 +72,7 @@ export class ReactiveFormComponent implements OnInit {
         // });
 
         // TODO: Explore intercepting original data to a copy (ngChanges..?), so original data remains intact / immutable
+        // TODO: OR have an editValue instead of value, so no need for cachedValue
         todoItem.toggleEdit = () => {
             todoItem.value.confirmed ? todoItem.cachedValue = todoItem.value : delete todoItem.cachedValue;         // Create cached value or delete it
             const confirmedValue = todoItem.value.confirmed;                                                        // Get todoForm todoList locked value

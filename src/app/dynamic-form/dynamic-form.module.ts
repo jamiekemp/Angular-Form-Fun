@@ -8,6 +8,7 @@ import { FormInputComponent } from './components/form-input/form-input.component
 import { FormSelectComponent } from './components/form-select/form-select.component';
 import { FormButtonComponent } from './components/form-button/form-button.component';
 import { FormGroupComponent } from './components/form-group/form-group.component';
+import { TestcComponent } from './components/testc/testc.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { FormGroupComponent } from './components/form-group/form-group.component
         FormSelectComponent,
         FormButtonComponent,
         FormGroupComponent,
+        TestcComponent,
     ],
     exports: [
         DynamicFormComponent,
