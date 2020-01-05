@@ -10,7 +10,7 @@ import { FieldConfig } from '../models/field-config.interface';
   templateUrl: './dynamic-form-page.component.html'
 })
 export class DynamicFormToddPageComponent implements AfterViewInit {
-    @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
+    @ViewChild(DynamicFormComponent, { static: true }) form: DynamicFormComponent;
 
     config: FieldConfig[] = [
         {
